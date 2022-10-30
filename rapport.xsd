@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" > 
+  <xsd:element name="rapport">
+      <xsd:complexType>
+          <xsd:sequence>
+              <xsd:element name="mandat" minOccurs="1" maxOccurs="unbounded" type="T_MANDAT"></xsd:element>
+          </xsd:sequence>
+      </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="T_MANDAT">
+      <xsd:sequence>
+          <xsd:element name="expediteur" type="T_ED"></xsd:element>
+          <xsd:element name="destinataire" type="T_ED"></xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="num" type="xsd:int" use="required"></xsd:attribute>
+      <xsd:attribute name="date" type="xsd:date" use="required"></xsd:attribute>
+      <xsd:attribute name="montant" use="required">
+          <xsd:simpleType>
+              <xsd:restriction base="xsd:double">
+                  <xsd:minInclusive value="50"></xsd:minInclusive>
+                  <xsd:maxInclusive value="20000"></xsd:maxInclusive>
+              </xsd:restriction>
+          </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="etat">
+          <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                  <xsd:enumeration value="reçu"></xsd:enumeration>
+                  <xsd:enumeration value="non reçu"></xsd:enumeration>
+              </xsd:restriction>
+          </xsd:simpleType>
+      </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="T_ED">
+      <xsd:attribute name="cin" type="xsd:string" use="required"></xsd:attribute>
+      <xsd:attribute name="nom" type="xsd:string" use="required"></xsd:attribute>
+      <xsd:attribute name="prenom" type="xsd:string" use="required"></xsd:attribute>
+      <xsd:attribute name="ville" type="xsd:string" use="optional"></xsd:attribute>
+  </xsd:complexType> 
+</xsd:schema>
